@@ -37,7 +37,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
 
     
   var yLinearScale = d3.scaleLinear()
-    .domain([30000, d3.max(stateData, d => d.income)])
+    .domain([38000, d3.max(stateData, d => d.income)])
     .range([height, 0]);
    
 
@@ -76,8 +76,8 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .text(function(d) { return d.abbr; })
     .attr('font-size',8)//font size
     //.attr('font-size',8)//font size
-    .attr("cx", d => xLinearScale(d.poverty))
-    .attr("cy", d => yLinearScale(d.income))
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.income))
     
 /*  
      var circlesGroup = maincirclesGroup.selectAll("circle")
