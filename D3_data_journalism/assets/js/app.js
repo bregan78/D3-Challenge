@@ -32,12 +32,12 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     });
     //console.log(stateData);
     var xLinearScale = d3.scaleLinear()
-    .domain([8, d3.max(stateData, d => d.poverty) ])
+    .domain([8, d3.max(stateData, d => d.poverty +2) ])
     .range([0, width]);
 
     
   var yLinearScale = d3.scaleLinear()
-    .domain([38000, d3.max(stateData, d => d.income)])
+    .domain([38000, d3.max(stateData, d => d.income +5000)])
     .range([height, 0]);
    
 
@@ -79,28 +79,20 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .attr("x", d => xLinearScale(d.poverty))
     .attr("y", d => yLinearScale(d.income))
     
-/*  
-     var circlesGroup = maincirclesGroup.selectAll("circle")
-    .data(stateData)
-    .enter()
-    .append("circle")
-    .classed("stateCircle", true )
-    .attr("cx", d => xLinearScale(d.poverty))
-    .attr("cy", d => yLinearScale(d.income))
-    .attr("r", "15");
-    //.text(d => d.abbr)
-    //.attr("fill", "lightblue")
-    //.attr("opacity", ".5");
+    // Create axes labels
+    chartGroup.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left )
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "2em")
+      .attr("class", "axisText")
+      .text("Income");
 
-    var text = chartGroup.selectAll("text")
-    .data(stateData)
-    .enter()
-    .append("text")
-    .classed("stateText", true) 
-    .text(function(d) { return d.abbv; })
-    //.attr('font-size',8)//font size
-    .attr("cx", d => xLinearScale(d.poverty))
-    .attr("cy", d => yLinearScale(d.income))
-     */
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("class", "axisText")
+      .text("Poverty Score");
+  }).catch(function(error) {
+    console.log(error);
+  });
  
-});
